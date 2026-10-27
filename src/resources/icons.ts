@@ -12,6 +12,7 @@ import {
   HiOutlineDocument,
   HiOutlineGlobeAsiaAustralia,
   HiOutlineRocketLaunch,
+  HiSparkles,
 } from "react-icons/hi2";
 
 import {
@@ -20,20 +21,31 @@ import {
   PiGridFourDuotone,
   PiBookBookmarkDuotone,
   PiImageDuotone,
+  PiPaletteDuotone,
 } from "react-icons/pi";
 
+import { SiJavascript, SiNextdotjs, SiFigma, SiSupabase } from "react-icons/si";
+
 import {
-  SiJavascript,
-  SiNextdotjs,
-  SiFigma,
-  SiSupabase,
-} from "react-icons/si";
+  FaDiscord,
+  FaGithub,
+  FaLinkedin,
+  FaX,
+  FaThreads,
+  FaInstagram,
+  FaXTwitter,
+  FaFacebook,
+  FaPinterest,
+  FaWhatsapp,
+  FaReddit,
+  FaTelegram,
+} from "react-icons/fa6";
 
-import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
-
-export const iconLibrary: Record<string, IconType> = {
+export const iconLibrary = {
   arrowUpRight: HiArrowUpRight,
   arrowRight: HiArrowRight,
+  sparkle: HiSparkles,
+  palette: PiPaletteDuotone,
   email: HiEnvelope,
   globe: HiOutlineGlobeAsiaAustralia,
   person: PiUserCircleDuotone,
@@ -64,7 +76,13 @@ export const iconLibrary: Record<string, IconType> = {
   reddit: FaReddit,
   telegram: FaTelegram,
   instagram: FaInstagram,
-};
+} satisfies Record<string, IconType>;
 
 export type IconLibrary = typeof iconLibrary;
 export type IconName = keyof IconLibrary;
+
+// Registers the names above with Once UI, so `<Icon name>` and every `icon`
+// prop accept them and a typo is a type error.
+declare module "@once-ui-system/core" {
+  interface IconLibraryOverrides extends Record<IconName, true> {}
+}

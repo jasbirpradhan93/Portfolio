@@ -12,15 +12,20 @@ export {
 
 export {
   display,
-  mailchimp,
+  newsletterForm,
   routes,
   protectedRoutes,
   baseURL,
-  fonts,
+  aesthetic,
+  activeAesthetic,
+  homeSections,
+  styleOverrides,
   style,
   schema,
   sameAs,
   socialSharing,
-  effects,
   dataStyle,
 } from "./once-ui.config";
+
+export { aesthetics, type AestheticName } from "./aesthetics";
+export { fontFamilies, type FontFamily } from "./fonts";

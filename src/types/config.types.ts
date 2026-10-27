@@ -1,7 +1,5 @@
 import {
   BorderStyle,
-  ChartMode,
-  ChartVariant,
   NeutralColor,
   ScalingSize,
   Schemes,
@@ -11,7 +9,8 @@ import {
   Theme,
   TransitionStyle,
 } from "@once-ui-system/core";
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
+import type { ChartMode, ChartVariant } from "@once-ui-system/core/data";
+import type { HomeSection } from "./aesthetic.types";
 
 /**
  * Display configuration for UI elements.
@@ -20,6 +19,7 @@ export type DisplayConfig = {
   location: boolean;
   time: boolean;
   themeSwitcher: boolean;
+  aestheticSwitcher: boolean;
 };
 
 /**
@@ -31,16 +31,6 @@ export type RoutesConfig = Record<`/${string}`, boolean>;
  * Protected route configuration.
  */
 export type ProtectedRoutesConfig = Record<`/${string}`, boolean>;
-
-/**
- * Font configuration for each variant.
- */
-export type FontsConfig = {
-  heading: NextFontWithVariable;
-  body: NextFontWithVariable;
-  label: NextFontWithVariable;
-  code: NextFontWithVariable;
-};
 
 /**
  * Style customization for main layout.
@@ -120,10 +110,10 @@ export type EffectsConfig = {
 };
 
 /**
- * Mailchimp configuration for newsletter forms.
+ * Newsletter signup form, backed by an Aveiro embed form.
  */
-export type MailchimpConfig = {
-  action: string;
+export type NewsletterFormConfig = {
+  aveiroEmbedId: string;
   effects: EffectsConfig;
 };
 
@@ -170,15 +160,15 @@ export type SocialSharingConfig = {
  */
 export type OnceUIConfig = {
   display: DisplayConfig;
-  mailchimp: MailchimpConfig;
+  newsletterForm: NewsletterFormConfig;
   routes: RoutesConfig;
   protectedRoutes: ProtectedRoutesConfig;
   baseURL: string;
-  fonts: FontsConfig;
+  aesthetic: string;
+  homeSections: HomeSection[];
   style: StyleConfig;
   schema: SchemaConfig;
   sameAs: SameAsConfig;
   socialSharing: SocialSharingConfig;
-  effects: EffectsConfig;
   dataStyle: DataStyleConfig;
 };
