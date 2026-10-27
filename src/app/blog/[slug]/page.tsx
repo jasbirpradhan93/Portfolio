@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import "katex/dist/katex.min.css";
 import { CustomMDX, ScrollToHash } from "@/components";
 import {
   Meta,
@@ -72,7 +73,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 
   return (
     <Row fillWidth>
-      <Row maxWidth={12} m={{ hide: true }} />
+      <Row maxWidth="12rem" m={{ hide: true }} />
       <Row fillWidth horizontal="center">
         <Column as="section" maxWidth="m" horizontal="center" gap="l" paddingTop="24">
           <Schema
@@ -95,18 +96,18 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
           />
           <Column maxWidth="s" gap="16" horizontal="center" align="center">
             <SmartLink href="/blog">
-              <Text variant="label-strong-m">Blog</Text>
+              <Text textVariant="label-strong-m">Blog</Text>
             </SmartLink>
-            <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
+            <Text textVariant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
               {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
             </Text>
-            <Heading variant="display-strong-m">{post.metadata.title}</Heading>
+            <Heading textVariant="display-strong-m">{post.metadata.title}</Heading>
             {post.metadata.subtitle && (
-              <Text 
-                variant="body-default-l" 
-                onBackground="neutral-weak" 
+              <Text
+                textVariant="body-default-l"
+                onBackground="neutral-weak"
                 align="center"
-                style={{ fontStyle: 'italic' }}
+                style={{ fontStyle: "italic" }}
               >
                 {post.metadata.subtitle}
               </Text>
@@ -114,8 +115,8 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
           </Column>
           <Row marginBottom="32" horizontal="center">
             <Row gap="16" vertical="center">
-              <Avatar size="s" src={person.avatar} />
-              <Text variant="label-default-m" onBackground="brand-weak">
+              <Avatar size="s" src={person.avatar} aria-label={person.name} />
+              <Text textVariant="label-default-m" onBackground="brand-weak">
                 {person.name}
               </Text>
             </Row>
@@ -136,15 +137,12 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
           <Column as="article" maxWidth="s">
             <CustomMDX source={post.content} />
           </Column>
-          
-          <ShareSection 
-            title={post.metadata.title} 
-            url={`${baseURL}${blog.path}/${post.slug}`} 
-          />
+
+          <ShareSection title={post.metadata.title} url={`${baseURL}${blog.path}/${post.slug}`} />
 
           <Column fillWidth gap="40" horizontal="center" marginTop="40">
             <Line maxWidth="40" />
-            <Text as="h2" id="recent-posts" variant="heading-strong-xl" marginBottom="24">
+            <Text as="h2" id="recent-posts" textVariant="heading-strong-xl" marginBottom="24">
               Recent posts
             </Text>
             <Posts exclude={[post.slug]} range={[1, 2]} columns="2" thumbnail direction="column" />
@@ -153,7 +151,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
         </Column>
       </Row>
       <Column
-        maxWidth={12}
+        maxWidth="12rem"
         paddingLeft="40"
         fitHeight
         position="sticky"

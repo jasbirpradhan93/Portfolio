@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import "katex/dist/katex.min.css";
 import { getPosts } from "@/utils/utils";
 import {
   Meta,
@@ -71,6 +72,7 @@ export default async function Project({
   const avatars =
     post.metadata.team?.map((person) => ({
       src: person.avatar,
+      "aria-label": person.name,
     })) || [];
 
   return (
@@ -94,17 +96,17 @@ export default async function Project({
       />
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <SmartLink href="/work">
-          <Text variant="label-strong-m">Projects</Text>
+          <Text textVariant="label-strong-m">Projects</Text>
         </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
+        <Text textVariant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
           {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
         </Text>
-        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
+        <Heading textVariant="display-strong-m">{post.metadata.title}</Heading>
       </Column>
       <Row marginBottom="32" horizontal="center">
         <Row gap="16" vertical="center">
           {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
-          <Text variant="label-default-m" onBackground="brand-weak">
+          <Text textVariant="label-default-m" onBackground="brand-weak">
             {post.metadata.team?.map((member, idx) => (
               <span key={idx}>
                 {idx > 0 && (
@@ -126,7 +128,7 @@ export default async function Project({
       </Column>
       <Column fillWidth gap="40" horizontal="center" marginTop="40">
         <Line maxWidth="40" />
-        <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
+        <Heading as="h2" textVariant="heading-strong-xl" marginBottom="24">
           Related projects
         </Heading>
         <Projects exclude={[post.slug]} range={[2]} />

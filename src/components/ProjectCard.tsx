@@ -15,9 +15,10 @@ interface ProjectCardProps {
   priority?: boolean;
   images: string[];
   title: string;
-  content: string;
+  /** Whether the project has a case study page to link to. */
+  hasContent: boolean;
   description: string;
-  avatars: { src: string }[];
+  avatars: { src: string; "aria-label"?: string }[];
   link: string;
 }
 
@@ -25,7 +26,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
   images = [],
   title,
-  content,
+  hasContent,
   description,
   avatars,
   link,
@@ -49,27 +50,27 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       >
         {title && (
           <Flex flex={5}>
-            <Heading as="h2" wrap="balance" variant="heading-strong-xl">
+            <Heading as="h2" wrap="balance" textVariant="heading-strong-xl">
               {title}
             </Heading>
           </Flex>
         )}
-        {(avatars?.length > 0 || description?.trim() || content?.trim()) && (
+        {(avatars?.length > 0 || description?.trim() || hasContent) && (
           <Column flex={7} gap="16">
             {avatars?.length > 0 && <AvatarGroup avatars={avatars} size="m" reverse />}
             {description?.trim() && (
-              <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">
+              <Text wrap="balance" textVariant="body-default-s" onBackground="neutral-weak">
                 {description}
               </Text>
             )}
             <Flex gap="24" wrap>
-              {content?.trim() && (
+              {hasContent && (
                 <SmartLink
                   suffixIcon="arrowRight"
                   style={{ margin: "0", width: "fit-content" }}
                   href={href}
                 >
-                  <Text variant="body-default-s">Read case study</Text>
+                  <Text textVariant="body-default-s">Read case study</Text>
                 </SmartLink>
               )}
               {link && (
@@ -78,7 +79,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   style={{ margin: "0", width: "fit-content" }}
                   href={link}
                 >
-                  <Text variant="body-default-s">View project</Text>
+                  <Text textVariant="body-default-s">View project</Text>
                 </SmartLink>
               )}
             </Flex>
